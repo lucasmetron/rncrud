@@ -26,7 +26,7 @@ const UserList = props => {
             <Text style={styles.subTitle}>{value.email}</Text>
           </View>
         </TouchableOpacity>
-        {/* <View style={styles.line} /> */}
+        <View style={styles.line} />
       </>
     );
   }
@@ -37,9 +37,6 @@ const UserList = props => {
         data={users}
         keyExtractor={user => user.id.toString()}
         renderItem={value => getUserItem(value.item)}
-        numColumns={2}
-        key={2}
-        style={{gap: 5}}
       />
     </View>
   );
@@ -57,7 +54,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'space-between',
-    borderWidth: 1,
   },
   infos: {
     flex: 1,
