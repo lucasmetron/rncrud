@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 
 const App: React.FC = () => {
   return (
-    <SafeAreaView style={styles.conainer}>
+    <SafeAreaView style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="UserList"
@@ -51,7 +51,7 @@ const App: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  conainer: {flex: 1},
+  container: {flex: 1},
 });
 
 export default App;
