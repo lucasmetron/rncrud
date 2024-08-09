@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useContext, useLayoutEffect, useState} from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {
   FlatList,
@@ -14,9 +14,10 @@ import {users} from '../data/users';
 import IconFeather from 'react-native-vector-icons/Feather';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import ConfirmScreen from '../components/ConfirmScreen';
+import UserContext from '../context/UserContext';
 
 const UserList = props => {
-  const [usersList, setUsersList] = useState([]);
+  const [usersList, setUsersList] = useContext(UserContext);
   const [isOponModal, setIsOponModal] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
 
@@ -69,7 +70,7 @@ const UserList = props => {
 
   useLayoutEffect(() => {
     if (users.length > 0) {
-      setUsersList(users);
+      setUsersList(usersList);
     }
   }, []);
 
@@ -80,15 +81,16 @@ const UserList = props => {
         keyExtractor={user => user.id.toString()}
         renderItem={value => getUserItem(value.item)}
       />
-
-      <ConfirmScreen
-        isOpen={isOponModal}
-        setIsOpen={setIsOponModal}
-        text={`Tem certeza que deseja deletar o usuário ${
-          userToDelete?.name || 'Erro'
-        }?`}
-        functionToExecOnClose={deleteFunction}
-      />
+      {isOponModal && (
+        <ConfirmScreen
+          isOpen={isOponModal}
+          setIsOpen={setIsOponModal}
+          text={`Tem certeza que deseja deletar o usuário ${
+            userToDelete?.name || 'Erro'
+          }?`}
+          functionToExecOnClose={deleteFunction}
+        />
+      )}
     </View>
   );
 };
